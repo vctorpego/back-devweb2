@@ -1,6 +1,8 @@
 package com.locadora.videolocadora.models;
 
 import jakarta.persistence.*;
+
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,14 +21,14 @@ public class ClasseModel {
     private Double valor;
 
     @Column(name = "prazo_devolucao", nullable = false)
-    private Integer prazoDevolucao;
+    private int prazoDevolucao;
 
     @OneToMany(mappedBy = "classe")
     private Set<TituloModel> titulos = new HashSet<>();
 
     public ClasseModel() {}
 
-    public ClasseModel(String nome, Double valor, Integer prazoDevolucao) {
+    public ClasseModel(String nome, Double valor, int prazoDevolucao) {
         this.nome = nome;
         this.valor = valor;
         this.prazoDevolucao = prazoDevolucao;
@@ -41,8 +43,8 @@ public class ClasseModel {
     public Double getValor() { return valor; }
     public void setValor(Double valor) { this.valor = valor; }
 
-    public Integer getPrazoDevolucao() { return prazoDevolucao; }
-    public void setPrazoDevolucao(Integer prazoDevolucao) { this.prazoDevolucao = prazoDevolucao; }
+    public int getPrazoDevolucao() { return prazoDevolucao; }
+    public void setPrazoDevolucao(int prazoDevolucao) { this.prazoDevolucao = prazoDevolucao; }
 
     public Set<TituloModel> getTitulos() { return titulos; }
     public void setTitulos(Set<TituloModel> titulos) { this.titulos = titulos; }

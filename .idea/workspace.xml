@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f7e93a6e-b6ae-4c3a-91f1-dbde533524ce" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/videolocadora/videolocadora/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/videolocadora/videolocadora/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/dtos/ClasseRecordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/dtos/ClasseRecordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/models/ClasseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/models/ClasseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/services/ClasseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/videolocadora/videolocadora/src/main/java/com/locadora/videolocadora/services/ClasseService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="34IfYc50WydNGfTMEaZUBu4F6dn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.VideolocadoraApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.videolocadora.app: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.videolocadora.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.videolocadora: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.videolocadora [clean].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Duda/Desktop/estudos/TRABALHOS DIVERSOS/DevWeb - Locadora/back-devweb2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.videolocadora: Compose Deployment">
+    <configuration name="VideolocadoraApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.locadora.videolocadora.VideolocadoraApplication" />
+      <module name="videolocadora" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.locadora.videolocadora.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="videolocadora: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="videolocadora/videolocadora/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="videolocadora.app: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="app" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="videolocadora/videolocadora/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="videolocadora.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="videolocadora/videolocadora/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.videolocadora: Compose Deployment" />
+        <item itemvalue="Docker.videolocadora.app: Compose Deployment" />
+        <item itemvalue="Docker.videolocadora.postgres: Compose Deployment" />
+        <item itemvalue="Application.VideolocadoraApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7e93a6e-b6ae-4c3a-91f1-dbde533524ce" name="Changes" comment="" />
+      <created>1760906059694</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760906059694</updated>
+    </task>
+    <servers />
+  </component>
+</project>
