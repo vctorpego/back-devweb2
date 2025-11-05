@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/itens")
+@RequestMapping("/itens")
 public class ItemController {
 
     @Autowired

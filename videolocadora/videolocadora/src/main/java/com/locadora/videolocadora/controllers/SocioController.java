@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/socios")
+@RequestMapping("/socios")
 public class SocioController {
 
     @Autowired
