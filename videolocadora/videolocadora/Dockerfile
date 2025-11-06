@@ -1,6 +1,6 @@
 
 # Usar a imagem base do OpenJDK 17
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-alpine
 
 # Definir diretório de trabalho
 WORKDIR /app
