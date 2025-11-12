@@ -2,6 +2,7 @@ package com.locadora.videolocadora.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,11 +38,11 @@ public class ItemModel {
     // Construtores
     public ItemModel() {}
 
-    public ItemModel(String numeroSerie, TituloModel titulo, TipoItem tipo) {
-        this.numeroSerie = numeroSerie;
+    public ItemModel(TituloModel titulo, TipoItem tipo, LocalDate dataAquisicao, String numeroSerie) {
         this.titulo = titulo;
         this.tipo = tipo;
-        this.dataAquisicao = LocalDate.now();
+        this.dataAquisicao = dataAquisicao;
+        this.numeroSerie = numeroSerie;
     }
 
     // Getters e Setters

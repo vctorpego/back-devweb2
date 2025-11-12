@@ -55,6 +55,7 @@ public class ItemService {
 
         ItemModel item = new ItemModel();
         item.setNumeroSerie(itemRecordDto.numeroSerie());
+        item.setDataAquisicao(itemRecordDto.dataAquisicao());
         item.setTipo(itemRecordDto.tipo());
         item.setTitulo(titulo);
 
@@ -73,6 +74,7 @@ public class ItemService {
 
                     item.setNumeroSerie(itemRecordDto.numeroSerie());
                     item.setTipo(itemRecordDto.tipo());
+                    item.setDataAquisicao(itemRecordDto.dataAquisicao());
 
                     // Atualizar título se necessário
                     if (!item.getTitulo().getId().equals(itemRecordDto.tituloId())) {
