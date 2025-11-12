@@ -1,4 +1,4 @@
 package com.locadora.videolocadora.dtos;
 
 
-public record ClasseRecordDto(Long id, String nome, Double valor, int prazoDevolucao) {}
+public record ClasseRecordDto(Long id, String nome, Double valor, int prazoDevolucao, int titulos) {}

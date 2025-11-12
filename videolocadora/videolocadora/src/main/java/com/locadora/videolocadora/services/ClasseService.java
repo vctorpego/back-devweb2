@@ -86,7 +86,8 @@ public class ClasseService {
                 classe.getId(),
                 classe.getNome(),
                 classe.getValor(),
-                classe.getPrazoDevolucao()
+                classe.getPrazoDevolucao(),
+                classe.getTitulos()!= null ? classe.getTitulos().size() : 0
         );
     }
 }

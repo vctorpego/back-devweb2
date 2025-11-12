@@ -1,3 +1,3 @@
 package com.locadora.videolocadora.dtos;
 
-public record DiretorRecordDto(Long id, String nome) {}
+public record DiretorRecordDto(Long id, String nome, int titulos) {}

@@ -77,6 +77,10 @@ public class AtorService {
     }
 
     private AtorRecordDto convertToDTO(AtorModel ator) {
-        return new AtorRecordDto(ator.getId(), ator.getNome());
+        return new AtorRecordDto(
+                ator.getId(),
+                ator.getNome(),
+                ator.getTitulos() != null ? ator.getTitulos().size() : 0
+        );
     }
 }

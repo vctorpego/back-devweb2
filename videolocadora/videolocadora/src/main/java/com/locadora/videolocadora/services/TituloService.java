@@ -80,16 +80,22 @@ public class TituloService {
         DiretorModel diretor = diretorRepository.findById(tituloRecordDto.diretorId())
                 .orElseThrow(() -> new RuntimeException("Diretor não encontrado"));
         titulo.setDiretor(diretor);
+        diretor.getTitulos().add(titulo);
 
         // Definir classe
         ClasseModel classe = classeRepository.findById(tituloRecordDto.classeId())
                 .orElseThrow(() -> new RuntimeException("Classe não encontrada"));
         titulo.setClasse(classe);
+        classe.getTitulos().add(titulo);
 
         // Definir atores
         if (tituloRecordDto.atoresIds() != null) {
             Set<AtorModel> atores = new HashSet<>(atorRepository.findAllById(tituloRecordDto.atoresIds()));
             titulo.setAtores(atores);
+
+            for (AtorModel ator : atores) {
+                ator.getTitulos().add(titulo);
+            }
         }
 
         TituloModel savedTitulo = tituloRepository.save(titulo);
@@ -111,24 +117,41 @@ public class TituloService {
                     titulo.setSinopse(tituloRecordDto.sinopse());
                     titulo.setCategoria(tituloRecordDto.categoria());
 
-                    // Atualizar diretor se necessário
+                    // Atualizar diretor
                     if (!titulo.getDiretor().getId().equals(tituloRecordDto.diretorId())) {
-                        DiretorModel diretor = diretorRepository.findById(tituloRecordDto.diretorId())
+                        DiretorModel novoDiretor = diretorRepository.findById(tituloRecordDto.diretorId())
                                 .orElseThrow(() -> new RuntimeException("Diretor não encontrado"));
-                        titulo.setDiretor(diretor);
+                        titulo.getDiretor().getTitulos().remove(titulo);
+                        titulo.setDiretor(novoDiretor);
+                        novoDiretor.getTitulos().add(titulo);
                     }
 
-                    // Atualizar classe se necessário
+                    // Atualizar classe
                     if (!titulo.getClasse().getId().equals(tituloRecordDto.classeId())) {
-                        ClasseModel classe = classeRepository.findById(tituloRecordDto.classeId())
+                        ClasseModel novaClasse = classeRepository.findById(tituloRecordDto.classeId())
                                 .orElseThrow(() -> new RuntimeException("Classe não encontrada"));
-                        titulo.setClasse(classe);
+                        titulo.getClasse().getTitulos().remove(titulo);
+                        titulo.setClasse(novaClasse);
+                        novaClasse.getTitulos().add(titulo);
                     }
 
-                    // Atualizar atores se necessário
+                    // Atualizar atores
                     if (tituloRecordDto.atoresIds() != null) {
-                        Set<AtorModel> atores = new HashSet<>(atorRepository.findAllById(tituloRecordDto.atoresIds()));
-                        titulo.setAtores(atores);
+                        Set<AtorModel> novosAtores = new HashSet<>(atorRepository.findAllById(tituloRecordDto.atoresIds()));
+
+                        // Remover título de atores antigos que não estão mais na lista
+                        for (AtorModel antigoAtor : new HashSet<>(titulo.getAtores())) {
+                            if (!novosAtores.contains(antigoAtor)) {
+                                antigoAtor.getTitulos().remove(titulo);
+                            }
+                        }
+
+                        // Adicionar título a novos atores
+                        for (AtorModel novoAtor : novosAtores) {
+                            novoAtor.getTitulos().add(titulo);
+                        }
+
+                        titulo.setAtores(novosAtores);
                     }
 
                     TituloModel updatedTitulo = tituloRepository.save(titulo);
@@ -148,6 +171,21 @@ public class TituloService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    @Transactional
+    public void adicionarAtorAoTitulo(Long tituloId, Long atorId) {
+        TituloModel titulo = tituloRepository.findById(tituloId)
+                .orElseThrow(() -> new RuntimeException("Título não encontrado"));
+
+        AtorModel ator = atorRepository.findById(atorId)
+                .orElseThrow(() -> new RuntimeException("Ator não encontrado"));
+
+        if (!titulo.getAtores().contains(ator)) {
+            titulo.getAtores().add(ator);
+            ator.getTitulos().add(titulo);
+            tituloRepository.save(titulo);
+        }
     }
 
     private TituloRecordDto convertToDTO(TituloModel titulo) {

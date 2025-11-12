@@ -77,6 +77,6 @@ public class DiretorService {
     }
 
     private DiretorRecordDto convertToDTO(DiretorModel diretor) {
-        return new DiretorRecordDto(diretor.getId(), diretor.getNome());
+        return new DiretorRecordDto(diretor.getId(), diretor.getNome(), diretor.getTitulos()!= null ? diretor.getTitulos().size() : 0);
     }
 }
