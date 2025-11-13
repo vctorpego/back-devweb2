@@ -1,6 +1,7 @@
-package com.locadora.videolocadora.services;
+package com.locadora.videolocadora.services.diretor;
 
 import com.locadora.videolocadora.dtos.DiretorRecordDto;
+import com.locadora.videolocadora.exceptions.DiretorNaoEncontradoException;
 import com.locadora.videolocadora.models.DiretorModel;
 import com.locadora.videolocadora.repositories.DiretorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class DiretorService {
     }
 
     public Optional<DiretorRecordDto> buscarPorId(Long id) {
-        return diretorRepository.findById(id)
-                .map(this::convertToDTO);
+        return Optional.ofNullable(diretorRepository.findById(id)
+                .map(this::convertToDTO).orElseThrow(() -> new DiretorNaoEncontradoException("Nao foi possivel encontarr o diretor com o id inserido!")));
     }
 
     public List<DiretorRecordDto> buscarPorNome(String nome) {

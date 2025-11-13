@@ -1,7 +1,7 @@
 package com.locadora.videolocadora.controllers;
 
 import com.locadora.videolocadora.dtos.AtorRecordDto;
-import com.locadora.videolocadora.services.AtorService;
+import com.locadora.videolocadora.services.ator.AtorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

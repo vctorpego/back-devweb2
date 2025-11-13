@@ -1,6 +1,7 @@
-package com.locadora.videolocadora.services;
+package com.locadora.videolocadora.services.ator;
 
 import com.locadora.videolocadora.dtos.AtorRecordDto;
+import com.locadora.videolocadora.exceptions.AtorNaoEncontradoException;
 import com.locadora.videolocadora.models.AtorModel;
 import com.locadora.videolocadora.repositories.AtorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class AtorService {
     }
 
     public Optional<AtorRecordDto> buscarPorId(Long id) {
-        return atorRepository.findById(id)
-                .map(this::convertToDTO);
+        return Optional.ofNullable(atorRepository.findById(id)
+                .map(this::convertToDTO).orElseThrow(() -> new AtorNaoEncontradoException("O ator com  esse id nao foi encontrado!")));
     }
 
     public List<AtorRecordDto> buscarPorNome(String nome) {

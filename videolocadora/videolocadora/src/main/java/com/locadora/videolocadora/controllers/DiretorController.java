@@ -1,7 +1,7 @@
 package com.locadora.videolocadora.controllers;
 
 import com.locadora.videolocadora.dtos.DiretorRecordDto;
-import com.locadora.videolocadora.services.DiretorService;
+import com.locadora.videolocadora.services.diretor.DiretorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
