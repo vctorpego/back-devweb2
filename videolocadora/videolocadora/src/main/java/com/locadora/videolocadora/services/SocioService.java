@@ -3,6 +3,7 @@ package com.locadora.videolocadora.services;
 import com.locadora.videolocadora.dtos.SocioRecordDto;
 import com.locadora.videolocadora.models.ClienteModel.Sexo;
 import com.locadora.videolocadora.models.SocioModel;
+import com.locadora.videolocadora.repositories.DependenteRepository;
 import com.locadora.videolocadora.repositories.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class SocioService {
 
     @Autowired
     private SocioRepository socioRepository;
+
+    @Autowired
+    private DependenteRepository dependenteRepository;
 
     public List<SocioRecordDto> listarTodos() {
         return socioRepository.findAll().stream()
@@ -76,6 +80,11 @@ public class SocioService {
 
     @Transactional
     public Optional<SocioRecordDto> atualizar(Long id, SocioRecordDto socioDto) {
+        System.out.println("===== DEBUG BACKEND =====");
+        System.out.println("ID: " + id);
+        System.out.println("DTO: " + socioDto);
+        System.out.println("estahAtivo RECEBIDO = " + socioDto.estahAtivo());
+        System.out.println("==========================");
         return socioRepository.findById(id)
                 .map(socio -> {
                     if (!socio.getCpf().equals(socioDto.cpf()) &&
@@ -83,12 +92,17 @@ public class SocioService {
                         throw new RuntimeException("Já existe um sócio com este CPF");
                     }
 
+
                     socio.setNome(socioDto.nome());
                     socio.setDtNascimento(socioDto.dtNascimento());
                     socio.setSexo(socioDto.sexo());
                     socio.setCpf(socioDto.cpf());
                     socio.setEndereco(socioDto.endereco());
                     socio.setTelefone(socioDto.telefone());
+                    socio.setEstahAtivo(socioDto.estahAtivo());
+                    if (!socioDto.estahAtivo()) {
+                        socio.getDependentes().forEach(dep -> dep.setEstahAtivo(false));
+                    }
 
                     SocioModel updatedSocio = socioRepository.save(socio);
                     return convertToDto(updatedSocio);

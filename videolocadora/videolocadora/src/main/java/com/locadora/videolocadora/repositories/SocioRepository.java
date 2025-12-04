@@ -1,6 +1,7 @@
 package com.locadora.videolocadora.repositories;
 
 import com.locadora.videolocadora.models.SocioModel;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,4 +23,8 @@ public interface SocioRepository extends JpaRepository<SocioModel, Long> {
 
     @Query("SELECT COUNT(d) FROM DependenteModel d WHERE d.socio.id = :socioId AND d.estahAtivo = true")
     Long countDependentesAtivosBySocioId(@Param("socioId") Long socioId);
+
+    @EntityGraph(attributePaths = "dependentes")
+    Optional<SocioModel> findById(Long id);
+
 }

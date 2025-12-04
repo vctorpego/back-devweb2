@@ -77,41 +77,65 @@ public class DependenteService {
     }
 
     @Transactional
-    public Optional<DependenteRecordDto> atualizar(Long id, DependenteRecordDto dependenteDto) {
+    public Optional<DependenteRecordDto> atualizar(Long id, DependenteRecordDto dto) {
         return dependenteRepository.findById(id)
                 .map(dependente -> {
-                    dependente.setNome(dependenteDto.nome());
-                    dependente.setDtNascimento(dependenteDto.dtNascimento());
-                    dependente.setSexo(dependenteDto.sexo());
 
-                    DependenteModel updatedDependente = dependenteRepository.save(dependente);
-                    return convertToDto(updatedDependente);
+                    SocioModel socio = socioRepository.findById(dto.socioId())
+                            .orElseThrow(() -> new RuntimeException("Sócio não encontrado"));
+
+                    // Validar limite de dependentes, caso troque o sócio
+                    if (!dependente.getSocio().getId().equals(dto.socioId())) {
+                        Long dependentesAtivos = socioRepository.countDependentesAtivosBySocioId(socio.getId());
+                        if (dependentesAtivos >= 3) {
+                            throw new RuntimeException("Sócio já possui 3 dependentes ativos");
+                        }
+                    }
+
+                    dependente.setNome(dto.nome());
+                    dependente.setDtNascimento(dto.dtNascimento());
+                    dependente.setSexo(dto.sexo());
+                    dependente.setSocio(socio);
+
+                    dependente.setEstahAtivo(dto.estahAtivo());
+
+                    DependenteModel updated = dependenteRepository.save(dependente);
+                    return convertToDto(updated);
                 });
     }
 
     @Transactional
     public Optional<DependenteRecordDto> desativar(Long id) {
         return dependenteRepository.findById(id)
-                .map(dependente -> {
-                    dependente.setEstahAtivo(false);
-                    DependenteModel updatedDependente = dependenteRepository.save(dependente);
-                    return convertToDto(updatedDependente);
+                .map(dep -> {
+                    dep.setEstahAtivo(false);
+                    DependenteModel saved = dependenteRepository.save(dep);
+                    return convertToDto(saved);
                 });
     }
 
     @Transactional
     public Optional<DependenteRecordDto> reativar(Long id) {
         return dependenteRepository.findById(id)
-                .map(dependente -> {
-                    // Verificar se o sócio pode ter mais dependentes ativos
-                    Long quantidadeDependentesAtivos = socioRepository.countDependentesAtivosBySocioId(dependente.getSocio().getId());
-                    if (quantidadeDependentesAtivos >= 3) {
-                        throw new RuntimeException("Sócio já possui 3 dependentes ativos");
+                .map(dep -> {
+                    SocioModel socio = dep.getSocio();
+
+                    long dependentesAtivos = socio.getDependentes().stream()
+                            .filter(DependenteModel::getEstahAtivo)
+                            .count();
+
+                    if (dependentesAtivos >= 3) {
+                        throw new RuntimeException(
+                                "Sócio já possui o máximo de 3 dependentes ativos"
+                        );
                     }
 
-                    dependente.setEstahAtivo(true);
-                    DependenteModel updatedDependente = dependenteRepository.save(dependente);
-                    return convertToDto(updatedDependente);
+                    // Reativar o dependente
+                    dep.setEstahAtivo(true);
+
+                    DependenteModel saved = dependenteRepository.save(dep);
+
+                    return convertToDto(saved);
                 });
     }
 
